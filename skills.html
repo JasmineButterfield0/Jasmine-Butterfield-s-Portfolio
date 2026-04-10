@@ -13,18 +13,25 @@
     *::before,
     *::after {
       box-sizing: border-box;
+
       margin: 0;
       padding: 0;
     }
 
     :root {
       --bg: #000000;
-      --surface: #272727;
+      --surface: white;
       --border: rgba(255, 255, 255, 0.10);
-      --text: #ededed;
-      --muted: rgba(237, 237, 237, 0.4);
+      --text: white;
+      --muted: white;
       --dim: white;
       --sidebar-w: 180px;
+
+    }
+
+    .glow {
+      color: white;
+      text-shadow: 0 0 8px white;
     }
 
     body {
@@ -204,11 +211,13 @@
       line-height: 1.1;
       letter-spacing: -0.01em;
       color: var(--text);
+      text-shadow: 0 0 6px #00ffff;
     }
 
     .skill-category em {
       font-style: italic;
       color: var(--muted);
+      text-shadow: 0 0 6px #00ffff;
     }
 
     .skill-count {
@@ -284,7 +293,7 @@
   <div class="main">
     <section class="page-hero">
       <p class="eyebrow">What I work with</p>
-      <h1>Skills &amp;<br><em>Expertise</em></h1>
+      <h1 class="glow">Skills &amp;<br><em>Expertise</em></h1>
     </section>
 
     <div class="skill-block">
@@ -349,7 +358,7 @@
     </div>
 
     <footer>
-      <span>&copy; 2026 Jasmine Butterfield</span>
+      <span> 2026 Jasmine Butterfield</span>
       <span>University of Central Florida</span>
     </footer>
   </div>
