@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience &mdash; Jasmine Butterfield</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Gloock&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #000000;
+      --surface: #272727;
+      --border: rgba(255, 255, 255, 0.10);
+      --text: #ededed;
+      --muted: rgba(237, 237, 237, 0.4);
+      --dim: white;
+      --sidebar-w: 180px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: var(--sidebar-w);
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 36px 28px;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      line-height: 1.4;
+      margin-bottom: 48px;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+    }
+
+    .sidebar-nav a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 8px 0;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sidebar-nav a::before {
+      content: '';
+      width: 16px;
+      height: 1px;
+      background: currentColor;
+      flex-shrink: 0;
+      transition: width 0.2s;
+    }
+
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+      color: var(--text);
+    }
+
+    .sidebar-nav a.active::before {
+      width: 28px;
+    }
+
+    .sidebar-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sidebar-bottom a {
+      font-size: 11px;
+      color: var(--dim);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .sidebar-bottom a:hover {
+      color: var(--text);
+    }
+
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+    }
+
+    .page-hero {
+      min-height: 38vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 72px 56px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.1s;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    .page-hero h1 {
+      font-family: 'Gloock', serif;
+      font-size: clamp(48px, 7vw, 92px);
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.25s;
+    }
+
+    .page-hero h1 em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    /* Section label */
+    .section-label {
+      padding: 22px 72px;
+      border-bottom: 1px solid var(--border);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    /* Experience entries */
+    .exp-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+      opacity: 0;
+      animation: fadeUp 0.45s ease forwards;
+    }
+
+    .exp-item:nth-child(1) {
+      animation-delay: 0.35s;
+    }
+
+    .exp-item:nth-child(2) {
+      animation-delay: 0.48s;
+    }
+
+    .exp-item:nth-child(3) {
+      animation-delay: 0.61s;
+    }
+
+    .exp-item:nth-child(4) {
+      animation-delay: 0.74s;
+    }
+
+    .exp-item:last-child {
+      border-bottom: none;
+    }
+
+    .exp-item:hover {
+      background: var(--surface);
+    }
+
+    .exp-left {
+      padding: 48px 48px 48px 72px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .exp-role {
+      font-family: 'Gloock', serif;
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      color: var(--text);
+    }
+
+    .exp-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .exp-company {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .exp-period {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--dim);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .exp-right {
+      padding: 48px 72px 48px 48px;
+    }
+
+    .exp-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    /* Bullet points inside desc */
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .exp-bullets li {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--dim);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 72px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--dim);
+      letter-spacing: 0.04em;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <aside class="sidebar">
+    <a href="index.html" class="logo">Jasmine<br>Butterfield</a>
+    <nav class="sidebar-nav">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Work</a>
+      <a href="skills.html">Skills</a>
+      <a href="education.html">Education</a>
+      <a href="experience.html" class="active">Experience</a>
+    </nav>
+    <div class="sidebar-bottom"><a href="index.html">← Home</a></div>
+  </aside>
+
+  <div class="main">
+    <section class="page-hero">
+      <p class="eyebrow">Where I've worked</p>
+      <h1>Professional<br><em>Experience</em></h1>
+    </section>
+
+    <div class="section-label">Professional Experience</div>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <p class="exp-role">Library &amp; Information Science Intern</p>
+        <div class="exp-meta">
+          <span class="exp-company">St. Johns River Water Management District</span>
+          <span class="exp-period">Aug 2025 &ndash; Dec 2025</span>
+        </div>
+      </div>
+      <div class="exp-right">
+        <ul class="exp-bullets">
+          Designed and piloted a metadata collection and migration project using Daminion DAM software.
+          <br>
+          <br>Created an industry&ndash;standard system to catalog hundreds of thousands of aerial imagery assets
+          spanning 30 years.<br>
+          <br>Delivered formal presentation of findings and authored a comprehensive SOP manual for continued
+          implementation.<br>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-label">Leadership &amp; Community Experience</div>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <p class="exp-role">Founder</p>
+        <div class="exp-meta">
+          <span class="exp-company">Feed the Unfortunate</span>
+          <span class="exp-period">2020 &ndash; 2024</span>
+        </div>
+      </div>
+      <div class="exp-right">
+        <ul class="exp-bullets">
+          <br>Led volunteer initiatives feeding 200+ stray cats and constructed 100+ outdoor shelters.<br>
+          <br>Organized food and clothing donation drives supporting homeless individuals and local churches.<br>
+          <br>Managed logistics, outreach, and volunteer coordination.<br>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <p class="exp-role">Volunteer</p>
+        <div class="exp-meta">
+          <span class="exp-company">Adopt a Stray</span>
+          <span class="exp-period">Miami, FL 2016 &ndash; 2022</span>
+        </div>
+      </div>
+      <div class="exp-right">
+        <ul class="exp-bullets">
+          <br>Assisted with adoptions and administered medication to ill animals.<br>
+          <br>Maintained clean kennel environments and provided daily care.
+        </ul>
+      </div>
+    </div>
+
+    <footer>
+      <span>&copy; 2026 Jasmine Butterfield</span>
+      <span>University of Central Florida</span>
+    </footer>
+  </div>
+</body>
+
+</html>

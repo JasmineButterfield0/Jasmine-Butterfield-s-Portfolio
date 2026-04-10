@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills &mdash; Jasmine Butterfield</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Gloock&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #000000;
+      --surface: #272727;
+      --border: rgba(255, 255, 255, 0.10);
+      --text: #ededed;
+      --muted: rgba(237, 237, 237, 0.4);
+      --dim: white;
+      --sidebar-w: 180px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: var(--sidebar-w);
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 36px 28px;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      line-height: 1.4;
+      margin-bottom: 48px;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+    }
+
+    .sidebar-nav a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 8px 0;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sidebar-nav a::before {
+      content: '';
+      width: 16px;
+      height: 1px;
+      background: currentColor;
+      flex-shrink: 0;
+      transition: width 0.2s;
+    }
+
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+      color: var(--text);
+    }
+
+    .sidebar-nav a.active::before {
+      width: 28px;
+    }
+
+    .sidebar-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sidebar-bottom a {
+      font-size: 11px;
+      color: var(--dim);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .sidebar-bottom a:hover {
+      color: var(--text);
+    }
+
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+    }
+
+    .page-hero {
+      min-height: 38vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 72px 56px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.1s;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    .page-hero h1 {
+      font-family: 'Gloock', serif;
+      font-size: clamp(48px, 7vw, 92px);
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.25s;
+    }
+
+    .page-hero h1 em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .skill-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 200px;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    .skill-block:nth-child(1) {
+      animation-delay: 0.35s;
+    }
+
+    .skill-block:nth-child(2) {
+      animation-delay: 0.45s;
+    }
+
+    .skill-block:nth-child(3) {
+      animation-delay: 0.55s;
+    }
+
+    .skill-block:nth-child(4) {
+      animation-delay: 0.65s;
+    }
+
+    .skill-left {
+      padding: 52px 48px 52px 72px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .skill-category {
+      font-family: 'Gloock', serif;
+      font-size: clamp(26px, 3.2vw, 40px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+
+    .skill-category em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .skill-count {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-top: 16px;
+    }
+
+    .skill-right {
+      padding: 52px 72px 52px 48px;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: center;
+      gap: 10px;
+    }
+
+    .pill {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 9px 20px;
+      border-radius: 100px;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      cursor: default;
+    }
+
+    .pill:hover {
+      color: var(--bg);
+      background: var(--text);
+      border-color: var(--text);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 72px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--dim);
+      letter-spacing: 0.04em;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <aside class="sidebar">
+    <a href="index.html" class="logo">Jasmine<br>Butterfield</a>
+    <nav class="sidebar-nav">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Work</a>
+      <a href="skills.html" class="active">Skills</a>
+      <a href="education.html">Education</a>
+      <a href="experience.html">Experience</a>
+    </nav>
+    <div class="sidebar-bottom"><a href="index.html">← Home</a></div>
+  </aside>
+
+  <div class="main">
+    <section class="page-hero">
+      <p class="eyebrow">What I work with</p>
+      <h1>Skills &amp;<br><em>Expertise</em></h1>
+    </section>
+
+    <div class="skill-block">
+      <div class="skill-left">
+        <div>
+          <p class="skill-category">Programming<br><em>Languages</em></p>
+          <p class="skill-count">4 languages</p>
+        </div>
+      </div>
+      <div class="skill-right">
+        <span class="pill">Java</span>
+        <span class="pill">C</span>
+        <span class="pill">C++</span>
+        <span class="pill">Python</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <div class="skill-left">
+        <div>
+          <p class="skill-category">Web<br><em>Technologies</em></p>
+          <p class="skill-count">3 technologies</p>
+        </div>
+      </div>
+      <div class="skill-right">
+        <span class="pill">HTML</span>
+        <span class="pill">CSS</span>
+        <span class="pill">JavaScript</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <div class="skill-left">
+        <div>
+          <p class="skill-category">Software &amp;<br><em>Tools</em></p>
+          <p class="skill-count">6 tools</p>
+        </div>
+      </div>
+      <div class="skill-right">
+        <span class="pill">Adobe Photoshop</span>
+        <span class="pill">Adobe InDesign</span>
+        <span class="pill">Unity</span>
+        <span class="pill">Maya</span>
+        <span class="pill">Visual Studio</span>
+        <span class="pill">VS Code</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <div class="skill-left">
+        <div>
+          <p class="skill-category">Library &amp;<br><em>Information Science</em></p>
+          <p class="skill-count">3 specialties</p>
+        </div>
+      </div>
+      <div class="skill-right">
+        <span class="pill">Digital Asset Management</span>
+        <span class="pill">Metadata Systems</span>
+        <span class="pill">SOP Documentation</span>
+        <span class="pill">Daminion DAM</span>
+      </div>
+    </div>
+
+    <footer>
+      <span>&copy; 2026 Jasmine Butterfield</span>
+      <span>University of Central Florida</span>
+    </footer>
+  </div>
+</body>
+
+</html>
