@@ -17,14 +17,20 @@
       padding: 0;
     }
 
+
     :root {
       --bg: #000000;
       --surface: #272727;
       --border: rgba(255, 255, 255, 0.10);
       --text: #ededed;
-      --muted: rgba(237, 237, 237, 0.4);
+      --muted: white;
       --dim: white;
       --sidebar-w: 180px;
+    }
+
+    .glow {
+      color: white;
+      text-shadow: 0 0 8px white
     }
 
     body {
@@ -324,13 +330,13 @@
       <a href="education.html">Education</a>
       <a href="experience.html" class="active">Experience</a>
     </nav>
-    <div class="sidebar-bottom"><a href="index.html">← Home</a></div>
+    <div class="sidebar-bottom"><a href="index.html"> Home</a></div>
   </aside>
 
   <div class="main">
     <section class="page-hero">
       <p class="eyebrow">Where I've worked</p>
-      <h1>Professional<br><em>Experience</em></h1>
+      <h1 class="glow">Professional<br><em>Experience</em></h1>
     </section>
 
     <div class="section-label">Professional Experience</div>
@@ -391,7 +397,7 @@
     </div>
 
     <footer>
-      <span>&copy; 2026 Jasmine Butterfield</span>
+      <span> 2026 Jasmine Butterfield</span>
       <span>University of Central Florida</span>
     </footer>
   </div>
