@@ -22,10 +22,16 @@
       --surface: #272727;
       --border: rgba(255, 255, 255, 0.10);
       --text: #ededed;
-      --muted: rgba(237, 237, 237, 0.4);
+      --muted: white;
       --dim: white;
       --sidebar-w: 180px;
     }
+
+    .glow {
+      color: white;
+      text-shadow: 0 0 8px rgb(205, 204, 204);
+    }
+
 
     body {
       background: var(--bg);
@@ -334,7 +340,7 @@
   <div class="main">
     <section class="page-hero">
       <p class="eyebrow">Academic background</p>
-      <h1>Education &amp;<br><em>Awards</em></h1>
+      <h1 class="glow">Education &amp;<br><em>Awards</em></h1>
     </section>
 
     <div class="school-item">
@@ -382,7 +388,7 @@
     </div>
 
     <footer>
-      <span>&copy; 2026 Jasmine Butterfield</span>
+      <span>2026 Jasmine Butterfield</span>
       <span>University of Central Florida</span>
     </footer>
   </div>
